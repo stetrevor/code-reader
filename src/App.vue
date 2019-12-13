@@ -104,6 +104,7 @@ body {
   display: flex;
   align-items: center;
   justify-content: flex-end;
+  background-color: #f0f0f0;
 
   button {
     color: #2c3e50;
