@@ -1,9 +1,6 @@
 <template>
   <div class="code-reader">
-    <pre
-      class="code-reader__code hljs"
-      v-if="!loading"
-    ><code v-html="hlText"></code></pre>
+    <pre class="code-reader__code hljs" v-if="!loading" v-html="hlText"></pre>
 
     <loading-spinner class="code-reader__loader" v-else></loading-spinner>
   </div>
@@ -58,6 +55,9 @@ export default {
   &__code {
     margin: 0;
     padding: 32px 16px;
+    font-family: "Ubuntu Mono", monospace;
+    font-size: 16px;
+    line-height: 1.6;
   }
 
   &__loader {
