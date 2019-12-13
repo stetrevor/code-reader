@@ -1,11 +1,20 @@
 <template>
   <div id="app">
-    <h1>App version: v1.1.0</h1>
-    <div id="nav">
-      <router-link to="/">Home</router-link> |
-      <router-link to="/about">About</router-link>
-    </div>
+    <h1 id="app-name">Code Reader</h1>
+
     <router-view />
+
+    <div class="toolbar">
+      <button @click="openFile">Open File</button>
+      <input
+        id="file"
+        type="file"
+        accept="text/*"
+        hidden
+        @change="displayFile($event.target.files[0])"
+      />
+      <router-link tag="button" to="/tabs">{{ tabCount }}</router-link>
+    </div>
 
     <div class="upgrade-dialog" v-if="prompt">
       <div class="upgrade-dialog__message">
@@ -28,6 +37,8 @@
 </template>
 
 <script>
+import { mapGetters, mapMutations } from "vuex";
+
 export default {
   created() {
     if (this.$workbox) {
@@ -37,11 +48,31 @@ export default {
     }
   },
 
+  computed: mapGetters(["tabCount"]),
+
   methods: {
+    ...mapMutations(["addFile"]),
+
     async upgrade() {
       this.prompt = false;
 
       await this.$workbox.messageSW({ type: "SKIP_WAITING" });
+    },
+
+    openFile() {
+      this.$el.querySelector("#file").click();
+    },
+
+    displayFile(file) {
+      const reader = new FileReader();
+      reader.onload = () => {
+        const text = reader.result;
+        const id = this.tabCount + 1;
+        const name = file.name;
+        this.addFile({ id, text, name });
+        this.$router.push({ name: "reader", params: { id } });
+      };
+      reader.readAsText(file);
     }
   },
 
@@ -58,13 +89,16 @@ export default {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-align: center;
   color: #2c3e50;
 }
-#nav {
+#app-name {
+  text-align: center;
+}
+.toolbar {
   padding: 30px;
-  a {
-    font-weight: bold;
+  text-align: center;
+
+  button {
     color: #2c3e50;
     &.router-link-exact-active {
       color: #42b983;
