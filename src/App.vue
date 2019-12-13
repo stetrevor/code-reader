@@ -1,11 +1,9 @@
 <template>
   <div id="app">
-    <h1 id="app-name">Code Reader</h1>
-
     <router-view />
 
     <div class="toolbar">
-      <button @click="openFile">Open File</button>
+      <button class="toolbar__open-file" @click="openFile">Open File</button>
       <input
         id="file"
         type="file"
@@ -85,24 +83,37 @@ export default {
 </script>
 
 <style lang="scss">
+body {
+  margin: 0;
+  padding: 0;
+}
+
 #app {
   font-family: "Avenir", Helvetica, Arial, sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
 }
-#app-name {
-  text-align: center;
-}
 .toolbar {
-  padding: 30px;
-  text-align: center;
+  position: fixed;
+  bottom: 0;
+  box-sizing: border-box;
+  width: 100%;
+  height: 48px;
+  padding: 0 32px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
 
   button {
     color: #2c3e50;
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+
+  &__open-file {
+    margin-right: 16px;
   }
 }
 

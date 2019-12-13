@@ -1,5 +1,7 @@
 <template>
   <div class="tabs">
+    <h1 id="app-name">Code Reader</h1>
+
     <file-item
       v-for="item in fileNames"
       :key="item.id"
@@ -31,5 +33,9 @@ export default {
 <style lang="scss">
 .tabs {
   margin: 1em;
+
+  #app-name {
+    text-align: center;
+  }
 }
 </style>
