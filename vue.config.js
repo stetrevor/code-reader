@@ -4,6 +4,13 @@ module.exports = {
   publicPath: process.env.NODE_ENV === "development" ? "/code-reader/" : "",
 
   configureWebpack: {
-    plugins: [new GenerateSW()]
+    plugins: [
+      process.env.NODE_ENV === "development"
+        ? new GenerateSW({
+            skipWaiting: true,
+            clientsClaim: true
+          })
+        : new GenerateSW()
+    ]
   }
 };
