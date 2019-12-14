@@ -41,7 +41,11 @@ module.exports = {
     ]
   },
 
+  // Turn off to make worker-loader work.
+  parallel: false,
   chainWebpack: config => {
+    config.module.rule("js").exclude.add(/\.worker\.js$/);
+
     config.module
       .rule("worker")
       .test(/\.worker\.js$/)
@@ -49,7 +53,6 @@ module.exports = {
       .loader("worker-loader")
       .end()
       .use("babel")
-      .loader("babel-loader")
-      .end();
+      .loader("babel-loader");
   }
 };
