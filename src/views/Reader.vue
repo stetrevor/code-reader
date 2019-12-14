@@ -1,6 +1,6 @@
 <template>
   <div class="reader">
-    <code-reader :text="text"></code-reader>
+    <code-reader :text="text" :wrap-text="wrapText"></code-reader>
   </div>
 </template>
 
@@ -17,6 +17,10 @@ export default {
   computed: mapState({
     text(state) {
       return state.files[this.$route.params.id].text;
+    },
+
+    wrapText(state) {
+      return state.wrapText;
     }
   })
 };

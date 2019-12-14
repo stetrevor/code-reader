@@ -1,6 +1,10 @@
 <template>
   <div class="code-reader">
-    <pre class="code-reader__code">{{ text }}</pre>
+    <pre
+      class="code-reader__code"
+      :class="{ 'code-reader__code--wrap-text': wrapText }"
+      >{{ text }}</pre
+    >
   </div>
 </template>
 
@@ -10,6 +14,11 @@ export default {
     text: {
       type: String,
       required: true
+    },
+
+    wrapText: {
+      type: Boolean,
+      default: false
     }
   }
 };
@@ -25,6 +34,10 @@ export default {
     line-height: 1.6;
     color: #5c6370;
     background-color: #ffffff;
+
+    &--wrap-text {
+      white-space: pre-wrap;
+    }
   }
 }
 </style>

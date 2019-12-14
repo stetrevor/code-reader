@@ -3,6 +3,11 @@
     <router-view class="content" />
 
     <div class="toolbar">
+      <div class="toolbar__wrap-text">
+        <input type="checkbox" id="wrap" v-model="wrapText" />
+        <label for="wrap">Wrap Text</label>
+      </div>
+
       <button class="toolbar__open-file" @click="openFile">Open File</button>
       <input
         id="file"
@@ -48,7 +53,19 @@ export default {
     }
   },
 
-  computed: mapGetters(["tabCount"]),
+  computed: {
+    ...mapGetters(["tabCount"]),
+
+    wrapText: {
+      get() {
+        return this.$store.state.wrapText;
+      },
+
+      set(value) {
+        this.$store.commit("updateWrapText", { wrapText: value });
+      }
+    }
+  },
 
   methods: {
     ...mapMutations(["addFile"]),
@@ -127,6 +144,10 @@ body {
     &.router-link-exact-active {
       color: #42b983;
     }
+  }
+
+  &__wrap-text {
+    margin-right: auto;
   }
 
   &__remove {

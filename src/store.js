@@ -11,7 +11,9 @@ export default new Vuex.Store({
        text: file content,
        name: file name,
        */
-    }
+    },
+
+    wrapText: false // If reader wrap text
   },
 
   getters: {
@@ -34,6 +36,10 @@ export default new Vuex.Store({
 
     removeFile(state, { id }) {
       Vue.delete(state.files, id);
+    },
+
+    updateWrapText(state, { wrapText }) {
+      state.wrapText = wrapText;
     }
   },
   actions: {}
