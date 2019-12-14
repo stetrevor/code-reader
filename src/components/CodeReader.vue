@@ -1,6 +1,6 @@
 <template>
   <div class="code-reader">
-    <pre class="code-reader__code"> {{ text }} </pre>
+    <pre class="code-reader__code">{{ text }}</pre>
   </div>
 </template>
 

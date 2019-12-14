@@ -32,8 +32,6 @@ export default {
 
 <style lang="scss">
 .tabs {
-  margin: 1em;
-
   #app-name {
     text-align: center;
   }

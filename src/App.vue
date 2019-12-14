@@ -1,6 +1,6 @@
 <template>
   <div id="app">
-    <router-view />
+    <router-view class="content" />
 
     <div class="toolbar">
       <button class="toolbar__open-file" @click="openFile">Open File</button>
@@ -11,7 +11,9 @@
         hidden
         @change="displayFile($event.target.files[0])"
       />
-      <router-link tag="button" to="/tabs">{{ tabCount }}</router-link>
+      <router-link class="toolbar__remove" tag="button" to="/tabs">{{
+        tabCount
+      }}</router-link>
     </div>
 
     <div class="upgrade-dialog" v-if="prompt">
@@ -93,12 +95,26 @@ body {
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   color: #2c3e50;
+  position: relative;
+  width: 100vw;
+  height: 100vh;
 }
+
+.content {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 100vw;
+  height: calc(100vh - 48px);
+  overflow: scroll;
+}
+
 .toolbar {
-  position: fixed;
+  position: absolute;
+  left: 0;
   bottom: 0;
   box-sizing: border-box;
-  width: 100%;
+  width: 100vw;
   height: 48px;
   padding: 0 32px;
   display: flex;
@@ -113,7 +129,8 @@ body {
     }
   }
 
-  &__open-file {
+  &__remove {
+    margin-left: 16px;
     margin-right: 16px;
   }
 }
