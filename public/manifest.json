@@ -1,6 +1,6 @@
 {
-  "name": "code-reader",
-  "short_name": "code-reader",
+  "name": "Code Reader",
+  "short_name": "Code Reader",
   "icons": [
     {
       "src": "./img/icons/android-chrome-192x192.png",
