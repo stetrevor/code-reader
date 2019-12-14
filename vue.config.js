@@ -39,20 +39,5 @@ module.exports = {
           })
         : new GenerateSW(runtimeCaching)
     ]
-  },
-
-  // Turn off to make worker-loader work.
-  parallel: false,
-  chainWebpack: config => {
-    config.module.rule("js").exclude.add(/\.worker\.js$/);
-
-    config.module
-      .rule("worker")
-      .test(/\.worker\.js$/)
-      .use("worker-loader")
-      .loader("worker-loader")
-      .end()
-      .use("babel")
-      .loader("babel-loader");
   }
 };
